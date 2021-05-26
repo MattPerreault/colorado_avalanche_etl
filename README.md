@@ -8,7 +8,7 @@
 
 ```sh
 From project root
-make -C python/etl deps 
+make -C python/jobs deps 
 ```
 
 ## Project Structure
