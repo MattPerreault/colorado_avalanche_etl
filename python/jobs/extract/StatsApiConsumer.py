@@ -12,10 +12,11 @@ class StatsApiConsumer:
         except requests.exceptions.HTTPError as err:
             raise SystemExit(err)
 
-    def get_team_data(self) -> dict:
-        print(self.raw_data.json())
+    def get_team_data(self) -> list:
+        raw_team_dict = self.raw_data.json()
+        return raw_team_dict['teams']
 
 
 if __name__ == '__main__':
     stats = StatsApiConsumer()
-    stats.get_team_data()
+    print(stats.get_team_data())
