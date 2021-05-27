@@ -12,8 +12,10 @@ class StatsProducer:
         except requests.exceptions.HTTPError as err:
             raise SystemExit(err)
 
-    def get_team_data(self) -> list:
-        raw_team_dict = self.raw_data.json()['teams'][0]
+        self.raw_team_data = self.raw_data.json()['teams'][0]
+
+    def get_team_data(self) -> dict:
+        raw_team_dict = self.raw_team_data
 
         formatted_team_dict = {
             'team_name': raw_team_dict['teamName'],
@@ -25,6 +27,9 @@ class StatsProducer:
         }
 
         return formatted_team_dict
+
+    def get_team_stats(self) -> dict:
+        pass
 
 
 if __name__ == '__main__':
