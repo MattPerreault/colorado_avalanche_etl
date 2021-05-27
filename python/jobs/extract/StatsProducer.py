@@ -5,6 +5,10 @@ AVS_TEAM_ENDPOINT = 'https://statsapi.web.nhl.com/api/v1/teams/21'
 
 
 class StatsProducer:
+    """Class that takes in a valid NHL API endpoint name as documented
+    in the NHL API documentation github (see README.md) and returns that
+    data as a formatted list of dictionaries.
+    """
     def __init__(self):
         try:
             self.raw_data = requests.get(AVS_TEAM_ENDPOINT)
