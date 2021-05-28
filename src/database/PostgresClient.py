@@ -1,5 +1,5 @@
 import psycopg2
-from src.configuration.config import config
+from ..configuration.config import config
 
 
 def initialize_db():
@@ -28,5 +28,4 @@ def initialize_db():
             print('Database connection closed.')
 
 
-if __name__ == '__main__':
-    initialize_db()
+initialize_db()

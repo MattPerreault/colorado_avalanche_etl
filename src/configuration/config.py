@@ -16,7 +16,3 @@ def config(config='database.ini', section='postgres') -> dict:
         raise Exception(f'Section {section} not found in the {config} file.')
 
     return db_creds
-
-
-if __name__ == '__main__':
-    print(config())
