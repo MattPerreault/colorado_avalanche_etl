@@ -22,12 +22,18 @@ class StatsProducer:
         raw_team_dict = self.raw_team_data
 
         formatted_team_dict = {
+            'id': raw_team_dict['id'],
+            'venue_id': raw_team_dict['venue']['id'],
+            'division_id': raw_team_dict['division']['id'],
+            'conference_id': raw_team_dict['conference']['id'],
+            'franchise_id': raw_team_dict['franchiseId'],
             'team_name': raw_team_dict['teamName'],
             'location': raw_team_dict['locationName'],
             'first_year_of_play': raw_team_dict['firstYearOfPlay'],
-            'division': raw_team_dict['division']['name'],
-            'conference': raw_team_dict['conference']['name'],
-            'website': raw_team_dict['officialSiteUrl']
+            'division_name': raw_team_dict['division']['name'],
+            'conference_name': raw_team_dict['conference']['name'],
+            'website': raw_team_dict['officialSiteUrl'],
+            'active_flag': raw_team_dict['active']
         }
 
         return formatted_team_dict
