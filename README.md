@@ -20,20 +20,19 @@ You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/
 
 ```sh
 From project root
-make -C python/jobs deps 
+make -C deps 
 ```
 
 ## Project Structure
 
 ```
 colroado_avalanche_etl
-├── python/
-    ├── jobs
-        ├── extract
-        │    ├── All python extract jobs
-        └── transform
-        │    ├── All python transform jobs (coming soon)
-        └── load
-             ├── All python load jobs (to some object storage, coming soon)
+├── src/
+    ├── configuration/  
 
+    ├── database/
+        └── DB connection python modules.
+    ├── extract/
+        └── All python data source extract code.
+             
 ``` 
