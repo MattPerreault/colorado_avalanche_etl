@@ -37,11 +37,3 @@ class StatsProducer:
         }
 
         return formatted_team_dict
-
-    def get_team_stats(self) -> dict:
-        pass
-
-
-if __name__ == '__main__':
-    stats = StatsProducer()
-    print(stats.get_team_data())

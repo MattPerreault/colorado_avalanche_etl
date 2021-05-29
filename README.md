@@ -29,7 +29,6 @@ make -C deps
 colroado_avalanche_etl
 ├── src/
     ├── configuration/  
-
     ├── database/
         └── DB connection python modules.
     ├── extract/
