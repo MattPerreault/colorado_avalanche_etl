@@ -25,11 +25,10 @@ make -C deps
 ## Run Command
 From /src
 ```sh
-python3 Executor.py
+$ python3 Executor.py
 ```
 
 ## Project Structure
-
 ```
 colroado_avalanche_etl
 ├── src/
@@ -37,6 +36,14 @@ colroado_avalanche_etl
         └── config files.
     ├── extract/
         └── All python data source extract code.
+    ├── test/
+        └── All unit tests.
     └── Runner.py
              
+``` 
+
+## Test
+Run individual unit test from test/
+```sh
+$ python <TEST_FILE>.py
 ``` 
