@@ -22,16 +22,21 @@ You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/
 From project root
 make -C deps 
 ```
+## Run Command
+From /src
+```sh
+python3 Executor.py
+```
 
 ## Project Structure
 
 ```
 colroado_avalanche_etl
 ├── src/
-    ├── configuration/  
-    ├── database/
-        └── DB connection python modules.
+    ├── configuration/
+        └── config files.
     ├── extract/
         └── All python data source extract code.
+    └── Executor.py --runner
              
 ``` 
