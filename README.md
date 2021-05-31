@@ -25,7 +25,7 @@ make -C deps
 ## Run Command
 From /src
 ```sh
-$ python3 Executor.py
+$ python Executor.py
 ```
 
 ## Project Structure
