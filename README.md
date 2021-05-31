@@ -37,6 +37,6 @@ colroado_avalanche_etl
         └── config files.
     ├── extract/
         └── All python data source extract code.
-    └── Executor.py --runner
+    └── Runner.py
              
 ``` 
