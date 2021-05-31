@@ -59,5 +59,37 @@ class StatsProducer:
         return formatted_team_dict
 
     def get_team_stat_data(self) -> dict:
-        raw_team_dict = self._get_raw_data()
-        return raw_team_dict
+        raw_team_dict = self._get_raw_data()['stats'][0]['splits'][0]
+        raw_team_stat_dict = raw_team_dict['stat']
+
+        formatted_dict = {
+            'team_id': raw_team_dict['team']['id'],
+            'games_played': raw_team_stat_dict['gamesPlayed'],
+            'wins': raw_team_stat_dict['wins'],
+            'losses': raw_team_stat_dict['losses'],
+            'overtime_losses': raw_team_stat_dict['ot'],
+            'total_points': raw_team_stat_dict['pts'],
+            'points_pct': raw_team_stat_dict['ptPctg'],
+            'goals_per_game': raw_team_stat_dict['goalsPerGame'],
+            'goals_against_per_game': raw_team_stat_dict['goalsAgainstPerGame'],
+            'power_play_pct': raw_team_stat_dict['powerPlayPercentage'],
+            'power_play_goals': raw_team_stat_dict['powerPlayGoals'],
+            'power_play_goals_against': raw_team_stat_dict['powerPlayGoalsAgainst'],
+            'power_play_opportunities': raw_team_stat_dict['powerPlayOpportunities'],
+            'penalty_kill_pct': raw_team_stat_dict['penaltyKillPercentage'],
+            'shots_per_game': raw_team_stat_dict['shotsPerGame'],
+            'shots_allowed_per_game': raw_team_stat_dict['shotsAllowed'],
+            'win_score_first_pct': raw_team_stat_dict['winScoreFirst'],
+            'win_opponent_score_first_pct': raw_team_stat_dict['winOppScoreFirst'],
+            'win_lead_first_period_pct': raw_team_stat_dict['winLeadFirstPer'],
+            'win_lead_second_period_pct': raw_team_stat_dict['winLeadSecondPer'],
+            'win_out_shoot_opponent_pct': raw_team_stat_dict['winOutshootOpp'],
+            'win_out_shot_by_opponent_pct': raw_team_stat_dict['winOutshotByOpp'],
+            'faceoffs_taken': raw_team_stat_dict['faceOffsTaken'],
+            'faceoffs_won': raw_team_stat_dict['faceOffsWon'],
+            'faceoffs_lost': raw_team_stat_dict['faceOffsLost'],
+            'faceoffs_win_pct': raw_team_stat_dict['faceOffWinPercentage'],
+            'shooting_pct': raw_team_stat_dict['shootingPctg'],
+            'save_pct': raw_team_stat_dict['savePctg']
+        }
+        return formatted_dict

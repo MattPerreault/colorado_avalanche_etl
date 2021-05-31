@@ -2,8 +2,7 @@
 
 
 ## Goal
-The goal of this project is to create a data processing framework to power
-an analytics dashboard for the Colorado Avalanche. Go AVS!
+The goal of this project is to create a data processing framework to populate a PostgreSQL DB that powers an analytics dashboard for the Colorado Avalanche. Go AVS!
 
 
 **Note** This project is powered by a free NHL API. See [this gitlab repo for API documentation](https://gitlab.com/dword4/nhlapi) Shout out to [@dw0rd4](https://twitter.com/dw0rd4)
@@ -46,4 +45,4 @@ colroado_avalanche_etl
 Run individual unit test from test/
 ```sh
 $ python <TEST_FILE>.py
-``` 
+```

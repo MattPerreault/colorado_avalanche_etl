@@ -13,8 +13,12 @@ class TestStatProducer(unittest.TestCase):
         with self.assertRaises(AssertionError):
             sp.StatsProducer(endpoint_name='bad name')
 
-    def test_get_team_stat_data(self):
-        stat = sp.StatsProducer(endpoint_name='team stats')
+    def test_get_endpoint_url(self):
+        stats = sp.StatsProducer(endpoint_name='team')
+
+        url = stats.endpoint
+
+        self.assertEqual(url, sp.AVS_TEAM['endpoint'])
 
 
 if __name__ == '__main__':

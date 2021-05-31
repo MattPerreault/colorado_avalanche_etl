@@ -25,7 +25,7 @@ class Runner:
         """Execute and commit INSERT statement to team table
         Close connection when done"""
 
-        stats_producer = StatsProducer()
+        stats_producer = StatsProducer('team')
         team_dict = stats_producer.get_team_data()
 
         sql = Runner.build_insert_sql('team', team_dict)
@@ -51,4 +51,4 @@ class Runner:
 
 if __name__ == '__main__':
     run = Runner()
-    run.insert_team_data()
+    
