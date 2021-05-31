@@ -21,6 +21,7 @@ You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/
 From project root
 make -C deps 
 ```
+# TODO: Postgres db access
 
 ## Valid enpoint name list (This list will continually grow as I build the DB.)
 ```python
