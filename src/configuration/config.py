@@ -1,7 +1,11 @@
+import os
 from configparser import ConfigParser
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def config(config='database.ini', section='postgres') -> dict:
+    config = os.path.join(CURRENT_DIR, config)
     parser = ConfigParser()
 
     parser.read(config)
