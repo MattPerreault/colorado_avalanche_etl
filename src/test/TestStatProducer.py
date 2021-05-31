@@ -20,6 +20,16 @@ class TestStatProducer(unittest.TestCase):
 
         self.assertEqual(url, sp.AVS_TEAM['endpoint'])
 
+    def test_get_team_stat_data(self):
+        stats = sp.StatsProducer(endpoint_name='team stats')
+
+        formatted_dict = stats.get_team_stat_data()
+
+        self.assertTrue(isinstance(formatted_dict['points_pct'], float))
+        self.assertTrue(isinstance(formatted_dict['power_play_pct'], float))
+        self.assertTrue(isinstance(formatted_dict['penalty_kill_pct'], float))
+        self.assertTrue(isinstance(formatted_dict['faceoffs_win_pct'], float))
+
 
 if __name__ == '__main__':
     unittest.main()
