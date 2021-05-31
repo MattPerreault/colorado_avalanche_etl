@@ -21,10 +21,17 @@ You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/
 From project root
 make -C deps 
 ```
+
+## Valid enpoint name list (This list will continually grow as I build the DB.)
+```python
+team -- general Avalanche team data
+team stats -- Avalanche team statistics
+```
+
 ## Run Command
-From /src
+From /src run.
 ```sh
-$ python Executor.py
+$ python Executor.py --endpointname <valid endpoint name>
 ```
 
 ## Project Structure
