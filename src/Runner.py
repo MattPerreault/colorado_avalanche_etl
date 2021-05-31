@@ -4,7 +4,7 @@ from configuration.config import config
 from extract.StatsProducer import StatsProducer
 
 
-class Executor:
+class Runner:
     """Open a connection to the db on instantiation.
     A suite of methods to execute commands to the PosgreSQL db.
     Leverages StatsProducer to which API endpoints to pull from."""
@@ -28,7 +28,7 @@ class Executor:
         stats_producer = StatsProducer()
         team_dict = stats_producer.get_team_data()
 
-        sql = Executor.build_insert_sql('team', team_dict)
+        sql = Runner.build_insert_sql('team', team_dict)
 
         query = self.cur.mogrify(sql, team_dict)
         print('Executing insert...')
@@ -50,5 +50,5 @@ class Executor:
 
 
 if __name__ == '__main__':
-    executor = Executor()
-    executor.insert_team_data()
+    run = Runner()
+    run.insert_team_data()
