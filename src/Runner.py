@@ -28,11 +28,11 @@ class Runner:
         Close connection when done"""
 
         formatted_data = self.get_endpoint_data()
-
-        sql = Runner.build_insert_sql(self.endpoint_name, formatted_data)
+        table = self.endpoint_name.replace(' ', '_')
+        sql = Runner.build_insert_sql(table, formatted_data)
 
         query = self.cur.mogrify(sql, formatted_data)
-        print(f'Executing insert on table {self.endpoint_name}')
+        print(f'Executing insert on table {table}')
         self.cur.execute(query)
 
         print('Committing transaction...')
