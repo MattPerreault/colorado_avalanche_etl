@@ -49,6 +49,8 @@ class Runner:
             formatted_dict = stats.get_team_data()
         elif self.endpoint_name == 'team stats':
             formatted_dict = stats.get_team_stat_data()
+        elif self.endpoint_name == 'roster':
+            formatted_dict = stats.get_roster_data()
 
         return formatted_dict
 

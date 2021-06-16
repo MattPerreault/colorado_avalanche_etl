@@ -7,8 +7,11 @@ AVS_TEAM = {'endpoint': 'https://statsapi.web.nhl.com/api/v1/teams/21',
 AVS_TEAM_STATS = {'endpoint': 'https://statsapi.web.nhl.com/api/v1/teams/21/stats',
                   'endpoint_name': 'team stats'}
 
-ENDPOINT_NAMES = ['team', 'team stats']
-ENDPOINT_LIST = [AVS_TEAM, AVS_TEAM_STATS]
+AVS_ROSTER = {'endpoint': 'https://statsapi.web.nhl.com/api/v1/teams/21/roster',
+              'endpoint_name': 'roster'}
+
+ENDPOINT_NAMES = ['team', 'team stats', 'roster']
+ENDPOINT_LIST = [AVS_TEAM, AVS_TEAM_STATS, AVS_ROSTER]
 
 
 class StatsProducer:
@@ -93,3 +96,20 @@ class StatsProducer:
             'save_pct': raw_team_stat_dict['savePctg']
         }
         return formatted_dict
+
+    def get_roster_data(self) -> list:
+        """Returns a dict list of roster data.
+        This will be used as mapping data to the player table."""
+        roster_list = []
+        raw_roster_data = self._get_raw_data()['roster']
+
+        for player in raw_roster_data:
+            formatted_dict = {
+                'player_id': int(player['person']['id']),
+                'full_name': player['person']['fullName'],
+                'jersey_number': int(player['jerseyNumber']),
+                'position': player['position']['name']
+            }
+            roster_list.append(formatted_dict)
+
+        return roster_list

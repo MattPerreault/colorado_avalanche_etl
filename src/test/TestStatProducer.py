@@ -30,6 +30,14 @@ class TestStatProducer(unittest.TestCase):
         self.assertTrue(isinstance(formatted_dict['penalty_kill_pct'], float))
         self.assertTrue(isinstance(formatted_dict['faceoffs_win_pct'], float))
 
+    def test_get_roster_data(self):
+        stats = sp.StatsProducer(endpoint_name='roster')
+
+        roster_list = stats.get_roster_data()
+
+        self.assertTrue(isinstance(roster_list[0]['player_id'], int))
+        self.assertTrue(isinstance(roster_list[0]['jersey_number'], int))
+
 
 if __name__ == '__main__':
     unittest.main()
