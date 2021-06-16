@@ -19,7 +19,7 @@ You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/
 
 ```sh
 From project root
-make -C deps 
+$make -C deps 
 ```
 **TODO:** *Postgres db access section.*
 
@@ -32,7 +32,7 @@ team stats -- Avalanche team statistics
 ## Run Command
 From /src run.
 ```sh
-$ python Executor.py --endpointname <valid endpoint name>
+$python Executor.py --endpointname <valid endpoint name>
 ```
 
 ## Project Structure
