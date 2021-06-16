@@ -27,6 +27,7 @@ $make -C deps
 ```python
 team -- general Avalanche team data
 team stats -- Avalanche team statistics
+roster -- Current Avalanche roster (used as a mapping table to the upcoming player table.)
 ```
 
 ## Run Command
