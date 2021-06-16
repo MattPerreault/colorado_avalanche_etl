@@ -29,6 +29,8 @@ class Runner:
 
         formatted_data = self.get_endpoint_data()
         table = self.endpoint_name.replace(' ', '_')
+
+        # TODO create insert SQL builder for dict list to handle roster data.
         sql = Runner.build_insert_sql(table, formatted_data)
 
         query = self.cur.mogrify(sql, formatted_data)
@@ -41,18 +43,18 @@ class Runner:
         self.cur.close()
         print('Database connection closed.')
 
-    def get_endpoint_data(self) -> dict:
+    def get_endpoint_data(self):
         """Returns formatted endpoint data."""
-        formatted_dict = {}
+        # TODO write unit test for proper return object.
         stats = StatsProducer(self.endpoint_name)
         if self.endpoint_name == 'team':
-            formatted_dict = stats.get_team_data()
+            formatted_data = stats.get_team_data()
         elif self.endpoint_name == 'team stats':
-            formatted_dict = stats.get_team_stat_data()
+            formatted_data = stats.get_team_stat_data()
         elif self.endpoint_name == 'roster':
-            formatted_dict = stats.get_roster_data()
+            formatted_data = stats.get_roster_data()
 
-        return formatted_dict
+        return formatted_data
 
     @staticmethod
     def build_insert_sql(table, data) -> str:
