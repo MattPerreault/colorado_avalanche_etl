@@ -5,9 +5,8 @@ from psycopg2.extras import execute_values
 from configuration.config import config
 from extract.StatsProducer import StatsProducer
 
-INSERT_TYPE_MAPP = {
-''
-}
+BULK_INSERT_LIST = ['roster']
+
 
 class Runner:
     """Open a connection to the db on instantiation.
@@ -34,7 +33,10 @@ class Runner:
         formatted_data = self.get_endpoint_data()
         table = self.endpoint_name.replace(' ', '_')
 
-        self.execute_single_insert(table, formatted_data)
+        if table in BULK_INSERT_LIST:
+            self.execute_bulk_instert(table, formatted_data)
+        else:
+            self.execute_single_insert(table, formatted_data)
 
         print('Committing transaction...')
         self.conn.commit()
