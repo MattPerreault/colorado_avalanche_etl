@@ -34,7 +34,7 @@ class Runner:
         table = self.endpoint_name.replace(' ', '_')
 
         if table in BULK_INSERT_LIST:
-            self.execute_bulk_instert(table, formatted_data)
+            self.execute_bulk_insert(table, formatted_data)
         else:
             self.execute_single_insert(table, formatted_data)
 
@@ -67,7 +67,7 @@ class Runner:
     def execute_bulk_insert(self, table, data):
         """Executes mulitple row insertion to a table"""
         columns = ','.join(data[0].keys())
-        query = f"INSERT INTO {table} ({columns}) VALAUES %s"
+        query = f"INSERT INTO {table} ({columns}) VALUES %s"
 
         # Convert data into a sequence of sequences
         values_list = [[value for value in row.values()] for row in data]
