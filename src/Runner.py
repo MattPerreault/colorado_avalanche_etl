@@ -1,9 +1,13 @@
 import argparse
 import psycopg2
+from psycopg2.extras import execute_values
 
 from configuration.config import config
 from extract.StatsProducer import StatsProducer
 
+INSERT_TYPE_MAPP = {
+''
+}
 
 class Runner:
     """Open a connection to the db on instantiation.
@@ -30,12 +34,7 @@ class Runner:
         formatted_data = self.get_endpoint_data()
         table = self.endpoint_name.replace(' ', '_')
 
-        # TODO create insert SQL builder for dict list to handle roster data.
-        sql = Runner.build_insert_sql(table, formatted_data)
-
-        query = self.cur.mogrify(sql, formatted_data)
-        print(f'Executing insert on table {table}')
-        self.cur.execute(query)
+        self.execute_single_insert(table, formatted_data)
 
         print('Committing transaction...')
         self.conn.commit()
@@ -56,8 +55,27 @@ class Runner:
 
         return formatted_data
 
+    def execute_single_insert(self, table, data):
+        """Executes a single row insertion to a table"""
+        sql = Runner.build_insert_sql(table, data)
+        query = self.cur.mogrify(sql, data)
+        print(f'Executing insert on table {table}')
+        self.cur.execute(query)
+
+    def execute_bulk_insert(self, table, data):
+        """Executes mulitple row insertion to a table"""
+        columns = ','.join(data[0].keys())
+        query = f"INSERT INTO {table} ({columns}) VALAUES %s"
+
+        # Convert data into a sequence of sequences
+        values_list = [[value for value in row.values()] for row in data]
+
+        print(f'Executing bulk insert on {table} table...')
+        execute_values(self.cur, query, values_list)
+
     @staticmethod
     def build_insert_sql(table, data) -> str:
+        """Returns a stringified INSTER statement for a single row of values"""
         columns = ', '.join(data.keys())
         values = ','.join([f'%({k})s' for k in data.keys()])
         sql = f"INSERT INTO {table} ({columns}) VALUES ({values})"
