@@ -6,7 +6,7 @@ The goal of this project is to create a data processing framework to populate a 
 
 
 **Note** This project is powered by a free NHL API. See [this gitlab repo for API documentation](https://gitlab.com/dword4/nhlapi) Shout out to [@dw0rd4](https://twitter.com/dw0rd4)
-You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/) spec at this [git hub repo](https://github.com/erunion/sport-api-specifications/tree/master/nhl) maintained by
+You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/) spec at this [git hub repo](https://github.com/erunion/sport-api-specifications/tree/master/nhl) maintained by [@erunion](https://github.com/erunion)
 
 ### Copyright
  > *NHL and the NHL Shield are registered trademarks of the National Hockey League. NHL and NHL team marks are the property of the NHL and its teams. © NHL 2021. All Rights Reserved.*
