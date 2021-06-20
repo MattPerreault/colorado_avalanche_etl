@@ -1,5 +1,7 @@
 import requests
+import psycopg2
 
+from configuration.config import config
 
 AVS_TEAM = {'endpoint': 'https://statsapi.web.nhl.com/api/v1/teams/21',
             'endpoint_name': 'team'}
@@ -10,8 +12,13 @@ AVS_TEAM_STATS = {'endpoint': 'https://statsapi.web.nhl.com/api/v1/teams/21/stat
 AVS_ROSTER = {'endpoint': 'https://statsapi.web.nhl.com/api/v1/teams/21/roster',
               'endpoint_name': 'roster'}
 
-ENDPOINT_NAMES = ['team', 'team stats', 'roster']
-ENDPOINT_LIST = [AVS_TEAM, AVS_TEAM_STATS, AVS_ROSTER]
+AVS_PLAYER_REG_SEASON = {'endpoint': 'https://statsapi.web.nhl.com/api/v1/people/{player_id}/stats?stats=statsSingleSeason&season=20202021',
+                         'endpoint_name': 'player_stats_single_season_reg'}
+
+ENDPOINT_NAMES = ['team', 'team stats',
+                  'roster', 'player_stats_single_season_reg']
+
+ENDPOINT_LIST = [AVS_TEAM, AVS_TEAM_STATS, AVS_ROSTER, AVS_PLAYER_REG_SEASON]
 
 
 class StatsProducer:
@@ -21,13 +28,9 @@ class StatsProducer:
     """
     def __init__(self, endpoint_name=AVS_TEAM['endpoint_name']):
         assert endpoint_name in ENDPOINT_NAMES, "Endpoint name not defined."
+        self.raw_data = None
+        self.player_ids = []
         self.endpoint = self._get_endpoint_url(endpoint_name)
-
-        try:
-            self.raw_data = requests.get(self.endpoint)
-            self.raw_data.raise_for_status()
-        except requests.exceptions.HTTPError as err:
-            raise SystemExit(err)
 
     def _get_endpoint_url(self, endpoint_name) -> str:
         """Returns the REST endpoint url for the given name."""
@@ -39,7 +42,38 @@ class StatsProducer:
 
     def _get_raw_data(self) -> dict:
         """Returns a JSON encoded dict list of raw data."""
+        try:
+            self.raw_data = requests.get(self.endpoint)
+            self.raw_data.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            raise SystemExit(err)
         return self.raw_data.json()
+
+    def _get_player_ids(self) -> list:
+        """Returns a list of player_id's from the active roster
+        to be used for making API request"""
+        player_ids = []
+        sql = 'SELECT player_id FROM roster'
+        db_creds = config()
+        try:
+            print('Connecting to the db...')
+            conn = psycopg2.connect(**db_creds)
+            cur = conn.cursor()
+            print('Running SELECT statement to get all player_ids...')
+            cur.execute(sql)
+
+            raw_data = cur.fetchall()
+            for row in raw_data:
+                player_ids.append(row[0])
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+
+        finally:
+            if conn:
+                cur.close()
+                conn.close()
+                print('Postgres connection closed.')
+        return player_ids
 
     def get_team_data(self) -> dict:
         raw_team_dict = self._get_raw_data()['teams'][0]
@@ -98,7 +132,7 @@ class StatsProducer:
         return formatted_dict
 
     def get_roster_data(self) -> list:
-        """Returns a dict list of roster data.
+        """Returns list of dicts of roster data.
         This will be used as mapping data to the player table."""
         roster_list = []
         raw_roster_data = self._get_raw_data()['roster']
@@ -113,3 +147,11 @@ class StatsProducer:
             roster_list.append(formatted_dict)
 
         return roster_list
+
+    def get_player_regular_season_stats(self) -> list:
+        """Returns a list of dicts, each dict being a player's on the roster stats
+        for the season"""
+        player_stats = []
+        raw_player_data = self._get_raw_data()
+
+

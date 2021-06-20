@@ -38,6 +38,11 @@ class TestStatProducer(unittest.TestCase):
         self.assertTrue(isinstance(roster_list[0]['player_id'], int))
         self.assertTrue(isinstance(roster_list[0]['jersey_number'], int))
 
+    def test_get_all_player_ids(self):
+        stats = sp.StatsProducer(endpoint_name='player_stats_single_season_reg')
+        player_id = stats._get_player_ids()
+        self.assertTrue(isinstance(player_id, list))
+
 
 if __name__ == '__main__':
     unittest.main()
