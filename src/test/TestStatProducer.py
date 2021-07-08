@@ -43,6 +43,12 @@ class TestStatProducer(unittest.TestCase):
         player_id = stats._get_player_ids()
         self.assertTrue(isinstance(player_id, list))
 
+    def test_get_raw_data(self):
+        # TODO: Finish test after figuring out how what should be returned.
+        simple_stat = sp.StatsProducer(endpoint_name='team')
+        expected = {
+
+        }
 
 if __name__ == '__main__':
     unittest.main()

@@ -29,7 +29,6 @@ class StatsProducer:
     def __init__(self, endpoint_name=AVS_TEAM['endpoint_name']):
         assert endpoint_name in ENDPOINT_NAMES, "Endpoint name not defined."
         self.raw_data = None
-        self.player_ids = []
         self.endpoint = self._get_endpoint_url(endpoint_name)
 
     def _get_endpoint_url(self, endpoint_name) -> str:
@@ -40,10 +39,10 @@ class StatsProducer:
                 ep_url = ep_dict['endpoint']
         return ep_url
 
-    def _get_raw_data(self) -> dict:
+    def _get_raw_data(self, id=None) -> dict:
         """Returns a JSON encoded dict list of raw data."""
         try:
-            self.raw_data = requests.get(self.endpoint)
+            self.raw_data = requests.get(self.endpoint.format(id))
             self.raw_data.raise_for_status()
         except requests.exceptions.HTTPError as err:
             raise SystemExit(err)
@@ -151,7 +150,7 @@ class StatsProducer:
     def get_player_regular_season_stats(self) -> list:
         """Returns a list of dicts, each dict being a player's on the roster stats
         for the season"""
+        # TODO: finish building method to return list of dicts
         player_stats = []
+        player_ids = self._get_player_ids()
         raw_player_data = self._get_raw_data()
-
-
