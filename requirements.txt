@@ -1,2 +1,4 @@
+black==23.9.1
 requests==2.25.1
+psycopg2-binary >= 2.9.7
 psycopg2==2.8.6

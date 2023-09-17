@@ -4,7 +4,7 @@ from configparser import ConfigParser
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def config(config='database.ini', section='postgres') -> dict:
+def config(config="database.ini", section="postgres") -> dict:
     config = os.path.join(CURRENT_DIR, config)
     parser = ConfigParser()
 
@@ -17,6 +17,6 @@ def config(config='database.ini', section='postgres') -> dict:
             db_creds[param[0]] = param[1]
 
     else:
-        raise Exception(f'Section {section} not found in the {config} file.')
+        raise Exception(f"Section {section} not found in the {config} file.")
 
     return db_creds
