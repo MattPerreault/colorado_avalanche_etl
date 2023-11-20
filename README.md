@@ -13,13 +13,13 @@ You can also visit the [OpenAPI3.0](https://swagger.io/docs/specification/about/
 
 ## Setup
 
-0. Install python3.9
+0. Install python3.11
 1. Create a python virtualenv
 2. Install requirements:
 
 ```sh
 From project root
-$make -C deps 
+$make deps 
 ```
 **TODO:** *Postgres db access section.*
 
